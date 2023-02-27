@@ -6,6 +6,8 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -25,19 +27,38 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
+                    ->maxLength(100)
+                    ->placeholder("Name"),
+                TextInput::make('email')
                     ->email()
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('password')
+                    ->placeholder("Email")
+                    ->maxLength(100),
+                TextInput::make('password')
                     ->password()
                     ->required()
-                    ->maxLength(255)
+                    ->placeholder("Password")
+                    ->maxLength(50)
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->visible(fn (Component $livewire): bool => $livewire instanceof Pages\CreateUser),
+                TextInput::make('area')
+                    ->placeholder("Area")
+                    ->maxLength(50),
+                TextInput::make('address')
+                    ->placeholder("Address")
+                    ->maxLength(100),
+                TextInput::make('phone')
+                    ->tel()
+                    ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
+                    ->placeholder("Phone")
+                    ->maxLength(20),
+                // Select::make('role_id')
+                //     ->required()
+                //     ->label('Role')
+                //     ->options(Role::all()->pluck('name', 'id'))
+                //     ->searchable()
             ]);
     }
 

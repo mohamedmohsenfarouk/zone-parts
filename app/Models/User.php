@@ -23,6 +23,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'area',
+        'address',
+        'phone',
+        // 'role_id'
     ];
 
     /**
@@ -48,4 +52,9 @@ class User extends Authenticatable
     // {
     //     return $this->email == 'admin@admin.com' && $this->hasVerifiedEmail();
     // }
+
+    public function merchant()
+    {
+        return $this->hasOne(Merchant::class);
+    }
 }
