@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\ProductResource\Pages;
+namespace App\Filament\Resources\MerchantResource\Pages;
 
-use App\Filament\Resources\ProductResource;
+use App\Filament\Resources\MerchantResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListProducts extends ListRecords
+class ListMerchants extends ListRecords
 {
-    protected static string $resource = ProductResource::class;
+    protected static string $resource = MerchantResource::class;
 
     protected function getActions(): array
     {

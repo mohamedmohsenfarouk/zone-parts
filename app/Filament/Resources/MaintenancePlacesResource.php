@@ -2,12 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Models\Brand;
-use App\Models\Product;
+use App\Filament\Resources\MaintenancePlacesResource\Pages;
+use App\Filament\Resources\MaintenancePlacesResource\RelationManagers;
+use App\Models\MaintenancePlaces;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -16,9 +14,9 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ProductResource extends Resource
+class MaintenancePlacesResource extends Resource
 {
-    protected static ?string $model = Product::class;
+    protected static ?string $model = MaintenancePlaces::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -30,12 +28,10 @@ class ProductResource extends Resource
                     ->required()
                     ->maxLength(100)
                     ->placeholder("Name"),
-                Select::make('brand_id')
+                TextInput::make('location')
                     ->required()
-                    ->label('Brand')
-                    ->relationship('brands','name')
-                    ->options(Brand::all()->pluck('name', 'id'))
-                    ->searchable()
+                    ->maxLength(255)
+                    ->placeholder("Location"),
             ]);
     }
 
@@ -44,7 +40,7 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('brand')->searchable(),
+                Tables\Columns\TextColumn::make('location')->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -69,9 +65,9 @@ class ProductResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListProducts::route('/'),
-            'create' => Pages\CreateProduct::route('/create'),
-            'edit' => Pages\EditProduct::route('/{record}/edit'),
+            'index' => Pages\ListMaintenancePlaces::route('/'),
+            'create' => Pages\CreateMaintenancePlaces::route('/create'),
+            'edit' => Pages\EditMaintenancePlaces::route('/{record}/edit'),
         ];
     }
 }
