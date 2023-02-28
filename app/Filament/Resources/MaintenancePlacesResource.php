@@ -18,7 +18,7 @@ class MaintenancePlacesResource extends Resource
 {
     protected static ?string $model = MaintenancePlaces::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-cog';
 
     public static function form(Form $form): Form
     {
