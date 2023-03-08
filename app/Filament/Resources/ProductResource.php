@@ -20,7 +20,7 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-cube';
 
     public static function form(Form $form): Form
     {
@@ -31,9 +31,10 @@ class ProductResource extends Resource
                     ->maxLength(100)
                     ->placeholder("Name"),
                 Select::make('brand_id')
+                    ->multiple()
                     ->required()
                     ->label('Brand')
-                    ->relationship('brands','name')
+                    ->relationship('brands', 'name')
                     ->options(Brand::all()->pluck('name', 'id'))
                     ->searchable()
             ]);
@@ -44,7 +45,7 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('brand')->searchable(),
+                Tables\Columns\TextColumn::make('brands.name')->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')

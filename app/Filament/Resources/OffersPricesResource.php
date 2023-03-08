@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CouponResource\Pages;
-use App\Filament\Resources\CouponResource\RelationManagers;
-use App\Models\Coupon;
+use App\Filament\Resources\OffersPricesResource\Pages;
+use App\Filament\Resources\OffersPricesResource\RelationManagers;
+use App\Models\OffersPrices;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -15,32 +15,24 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CouponResource extends Resource
+class OffersPricesResource extends Resource
 {
-    protected static ?string $model = Coupon::class;
+    protected static ?string $model = OffersPrices::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
+    protected static ?string $navigationIcon = 'heroicon-o-calculator';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
+                TextInput::make('description')
                     ->required()
-                    ->maxLength(100)
-                    ->placeholder("Name"),
-                Select::make('type')
+                    ->maxLength(255)
+                    ->placeholder("description"),
+                TextInput::make('file')
                     ->required()
-                    ->label('Name')
-                    ->options([
-                        'fixed' => 'Fixed',
-                        'percentage' => 'Percentage',
-                    ])
-                    ->searchable(),
-                TextInput::make('value')
-                    ->required()
-                    ->maxLength(50)
-                    ->placeholder("Value"),
+                    ->maxLength(255)
+                    ->placeholder("file"),
             ]);
     }
 
@@ -48,9 +40,8 @@ class CouponResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('type')->searchable(),
-                Tables\Columns\TextColumn::make('value'),
+                Tables\Columns\TextColumn::make('description')->searchable(),
+                Tables\Columns\TextColumn::make('file'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -64,20 +55,20 @@ class CouponResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-
+    
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-
+    
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCoupons::route('/'),
-            'create' => Pages\CreateCoupon::route('/create'),
-            'edit' => Pages\EditCoupon::route('/{record}/edit'),
+            'index' => Pages\ListOffersPrices::route('/'),
+            'create' => Pages\CreateOffersPrices::route('/create'),
+            'edit' => Pages\EditOffersPrices::route('/{record}/edit'),
         ];
-    }
+    }    
 }

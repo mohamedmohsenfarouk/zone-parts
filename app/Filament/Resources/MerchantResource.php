@@ -20,7 +20,7 @@ class MerchantResource extends Resource
 {
     protected static ?string $model = Merchant::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     public static function form(Form $form): Form
     {
