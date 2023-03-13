@@ -41,7 +41,7 @@ class OffersPricesResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('description')->searchable(),
-                Tables\Columns\TextColumn::make('file')->url(fn (OffersPrices $record): string => public_path('storage/'.$record->file))
+                Tables\Columns\TextColumn::make('file')->url(fn (OffersPrices $record): string => url('public/storage/'.$record->file))
                     ->openUrlInNewTab(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),
