@@ -6,6 +6,7 @@ use App\Filament\Resources\OffersPricesResource\Pages;
 use App\Filament\Resources\OffersPricesResource\RelationManagers;
 use App\Models\OffersPrices;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
@@ -29,10 +30,9 @@ class OffersPricesResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->placeholder("description"),
-                TextInput::make('file')
+                FileUpload::make('file')
                     ->required()
-                    ->maxLength(255)
-                    ->placeholder("file"),
+                    ->preserveFilenames()
             ]);
     }
 
@@ -41,7 +41,8 @@ class OffersPricesResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('description')->searchable(),
-                Tables\Columns\TextColumn::make('file'),
+                Tables\Columns\TextColumn::make('file')->url(fn (OffersPrices $record): string => public_path('storage/'.$record->file))
+                    ->openUrlInNewTab(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -55,14 +56,14 @@ class OffersPricesResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -70,5 +71,5 @@ class OffersPricesResource extends Resource
             'create' => Pages\CreateOffersPrices::route('/create'),
             'edit' => Pages\EditOffersPrices::route('/{record}/edit'),
         ];
-    }    
+    }
 }
