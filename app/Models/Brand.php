@@ -10,7 +10,7 @@ class Brand extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name_en', 'name_ar', 'image', 'has_best'
     ];
 
     public function products()
