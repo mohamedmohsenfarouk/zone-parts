@@ -15,7 +15,14 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
+            $table->string('name_en', 100);
+            $table->string('name_ar', 100);
+            $table->string('description', 255);
+            $table->string('image', 255);
+            $table->enum('status', ['new', 'used'])->nullable();
+            $table->unsignedBigInteger('department_id');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
