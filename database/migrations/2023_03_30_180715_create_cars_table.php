@@ -29,8 +29,8 @@ class CreateCarsTable extends Migration
             $table->unsignedBigInteger('models_id');
             $table->foreign('models_id')->references('id')->on('models')->onDelete('cascade');
 
-            $table->unsignedBigInteger('power_hours_id');
-            $table->foreign('power_hourse_id')->references('id')->on('power_hours')->onDelete('cascade');
+            $table->unsignedBigInteger('powerhours_id');
+            $table->foreign('powerhours_id')->references('id')->on('power_hours')->onDelete('cascade');
             
             $table->timestamps();
         });

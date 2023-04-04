@@ -22,7 +22,6 @@ class CreateProductsTable extends Migration
             $table->enum('status', ['new', 'used'])->nullable();
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
-            
             $table->timestamps();
         });
     }
