@@ -20,7 +20,7 @@ class CreateCarsTable extends Migration
             $table->string('image', 255);
             $table->string('year', 100);
 
-            $table->enum('status', ['new', 'used'])->nullable(); //الناقل لسه مش عارفة 
+            $table->enum('status', ['new', 'used'])->nullable(); //الناقل لسه مش عارفة
 
             $table->unsignedBigInteger('brands_id');
             $table->foreign('brands_id')->references('id')->on('brands')->onDelete('cascade');
@@ -30,8 +30,8 @@ class CreateCarsTable extends Migration
             $table->foreign('models_id')->references('id')->on('models')->onDelete('cascade');
 
             $table->unsignedBigInteger('power_hours_id');
-            $table->foreign('power_hourse_id')->references('id')->on('power_hours')->onDelete('cascade');
-            
+            $table->foreign('power_hours_id')->references('id')->on('power_hours')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
