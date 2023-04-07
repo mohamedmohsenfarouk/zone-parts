@@ -28,22 +28,22 @@ class CouponResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(100)
-                    ->placeholder("Name"),
-                Select::make('type')
-                    ->required()
-                    ->label('Name')
-                    ->options([
-                        'fixed' => 'Fixed',
-                        'percentage' => 'Percentage',
-                    ])
-                    ->searchable(),
-                TextInput::make('value')
-                    ->required()
-                    ->maxLength(50)
-                    ->placeholder("Value"),
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(100)
+                        ->placeholder("Name"),
+                    Select::make('type')
+                        ->required()
+                        ->label('Name')
+                        ->options([
+                            'fixed' => 'Fixed',
+                            'percentage' => 'Percentage',
+                        ])
+                        ->searchable(),
+                    TextInput::make('value')
+                        ->required()
+                        ->maxLength(50)
+                        ->placeholder("Value"),
                 ])
             ]);
     }
@@ -52,6 +52,7 @@ class CouponResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('type')->searchable(),
                 TextColumn::make('value'),

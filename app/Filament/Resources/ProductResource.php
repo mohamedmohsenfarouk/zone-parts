@@ -29,18 +29,18 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(100)
-                    ->placeholder("Name"),
-                Select::make('brand_id')
-                    ->multiple()
-                    ->required()
-                    ->label('Brand')
-                    ->relationship('brands', 'name')
-                    ->options(Brand::all()->pluck('name', 'id'))
-                    ->searchable()
-            ])
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(100)
+                        ->placeholder("Name"),
+                    Select::make('brand_id')
+                        ->multiple()
+                        ->required()
+                        ->label('Brand')
+                        ->relationship('brands', 'name')
+                        ->options(Brand::all()->pluck('name', 'id'))
+                        ->searchable()
+                ])
             ]);
     }
 
@@ -48,6 +48,7 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('brands.name')->searchable(),
                 TextColumn::make('created_at')
@@ -62,8 +63,7 @@ class ProductResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-            ])
-            ;
+            ]);
     }
 
     public static function getRelations(): array

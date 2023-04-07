@@ -27,11 +27,11 @@ class PaymentResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(100)
-                    ->placeholder("Name"),
-            ])
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(100)
+                        ->placeholder("Name"),
+                ])
             ]);
     }
 
@@ -39,6 +39,7 @@ class PaymentResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),

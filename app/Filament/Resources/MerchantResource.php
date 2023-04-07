@@ -29,33 +29,33 @@ class MerchantResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                Select::make('user_id')
-                    ->required()
-                    ->label('Name')
-                    ->options(User::all()->pluck('name', 'id'))
-                    ->searchable(),
-                // TextInput::make('product_status')   //enum
-                //     ->required()
-                //     ->maxLength(100)
-                //     ->placeholder("Status"),
-                // TextInput::make('product_qty')   //number
-                //     ->required()
-                //     ->maxLength(10)
-                //     ->placeholder("Quantity"),
-                // TextInput::make('product_price')
-                //     ->required()
-                //     ->maxLength(50)
-                //     ->placeholder("Price"),
-                // TextInput::make('product_img')   //select image
-                //     ->maxLength(100)
-                //     ->placeholder("Image"),
-                TextInput::make('bank_name')
-                    ->maxLength(100)
-                    ->placeholder("Bank Name"),
-                TextInput::make('iban')
-                    ->maxLength(100)
-                    ->placeholder("IBAN"),
-            ])
+                    Select::make('user_id')
+                        ->required()
+                        ->label('Name')
+                        ->options(User::all()->pluck('name', 'id'))
+                        ->searchable(),
+                    // TextInput::make('product_status')   //enum
+                    //     ->required()
+                    //     ->maxLength(100)
+                    //     ->placeholder("Status"),
+                    // TextInput::make('product_qty')   //number
+                    //     ->required()
+                    //     ->maxLength(10)
+                    //     ->placeholder("Quantity"),
+                    // TextInput::make('product_price')
+                    //     ->required()
+                    //     ->maxLength(50)
+                    //     ->placeholder("Price"),
+                    // TextInput::make('product_img')   //select image
+                    //     ->maxLength(100)
+                    //     ->placeholder("Image"),
+                    TextInput::make('bank_name')
+                        ->maxLength(100)
+                        ->placeholder("Bank Name"),
+                    TextInput::make('iban')
+                        ->maxLength(100)
+                        ->placeholder("IBAN"),
+                ])
             ]);
     }
 
@@ -63,6 +63,7 @@ class MerchantResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 TextColumn::make('user.name')->searchable(),
                 // TextColumn::make('product_status')->searchable(),
                 // TextColumn::make('product_qty'),

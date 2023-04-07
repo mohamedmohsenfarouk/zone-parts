@@ -28,23 +28,23 @@ class OrderResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                Select::make('status')
-                    ->required()
-                    ->label('Status')
-                    ->options([
-                        'new' => 'New',
-                        'accepted' => 'Accepted',
-                        'preparing' => 'Preparing',
-                        'shipped' => 'Shipped',
-                        'delivered' => 'Delivered',
-                    ])
-                    ->searchable(),
-                Select::make('payment_id')
-                    ->required()
-                    ->label('Payment')
-                    ->options(Payment::all()->pluck('name', 'id'))
-                    ->searchable(),
-            ])
+                    Select::make('status')
+                        ->required()
+                        ->label('Status')
+                        ->options([
+                            'new' => 'New',
+                            'accepted' => 'Accepted',
+                            'preparing' => 'Preparing',
+                            'shipped' => 'Shipped',
+                            'delivered' => 'Delivered',
+                        ])
+                        ->searchable(),
+                    Select::make('payment_id')
+                        ->required()
+                        ->label('Payment')
+                        ->options(Payment::all()->pluck('name', 'id'))
+                        ->searchable(),
+                ])
             ]);
     }
 
@@ -52,6 +52,7 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 TextColumn::make('status')->searchable(),
                 TextColumn::make('payment.name')->searchable(),
                 TextColumn::make('created_at')
