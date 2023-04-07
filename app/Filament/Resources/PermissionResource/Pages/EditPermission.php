@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\BrandResource\Pages;
+namespace App\Filament\Resources\PermissionResource\Pages;
 
-use App\Filament\Resources\BrandResource;
+use App\Filament\Resources\PermissionResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditBrand extends EditRecord
+class EditPermission extends EditRecord
 {
-    protected static string $resource = BrandResource::class;
+    protected static string $resource = PermissionResource::class;
 
     protected function getActions(): array
     {
@@ -16,12 +16,13 @@ class EditBrand extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+    
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
     }
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Brand updated';
+        return 'Permission updated';
     }
 }

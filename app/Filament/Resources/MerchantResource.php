@@ -7,12 +7,14 @@ use App\Filament\Resources\MerchantResource\RelationManagers;
 use App\Models\Merchant;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -26,6 +28,7 @@ class MerchantResource extends Resource
     {
         return $form
             ->schema([
+                Card::make()->schema([
                 Select::make('user_id')
                     ->required()
                     ->label('Name')
@@ -52,6 +55,7 @@ class MerchantResource extends Resource
                 TextInput::make('iban')
                     ->maxLength(100)
                     ->placeholder("IBAN"),
+            ])
             ]);
     }
 
@@ -59,21 +63,22 @@ class MerchantResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')->searchable(),
-                // Tables\Columns\TextColumn::make('product_status')->searchable(),
-                // Tables\Columns\TextColumn::make('product_qty'),
-                // Tables\Columns\TextColumn::make('product_price')->searchable(),
-                // Tables\Columns\TextColumn::make('product_img'),   //show image
-                Tables\Columns\TextColumn::make('bank_name')->searchable(),
-                Tables\Columns\TextColumn::make('iban'),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('user.name')->searchable(),
+                // TextColumn::make('product_status')->searchable(),
+                // TextColumn::make('product_qty'),
+                // TextColumn::make('product_price')->searchable(),
+                // TextColumn::make('product_img'),   //show image
+                TextColumn::make('bank_name')->searchable(),
+                TextColumn::make('iban'),
+                TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime('M j, Y')->sortable(),
             ])
             ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

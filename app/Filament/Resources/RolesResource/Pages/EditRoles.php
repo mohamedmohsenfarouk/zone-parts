@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\BrandResource\Pages;
+namespace App\Filament\Resources\RolesResource\Pages;
 
-use App\Filament\Resources\BrandResource;
+use App\Filament\Resources\RolesResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditBrand extends EditRecord
+class EditRoles extends EditRecord
 {
-    protected static string $resource = BrandResource::class;
+    protected static string $resource = RolesResource::class;
 
     protected function getActions(): array
     {
@@ -22,6 +22,6 @@ class EditBrand extends EditRecord
     }
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Brand updated';
+        return 'Role updated';
     }
 }

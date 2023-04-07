@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\BrandResource\Pages;
+namespace App\Filament\Resources\PermissionResource\Pages;
 
-use App\Filament\Resources\BrandResource;
+use App\Filament\Resources\PermissionResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateBrand extends CreateRecord
+class CreatePermission extends CreateRecord
 {
-    protected static string $resource = BrandResource::class;
+    protected static string $resource = PermissionResource::class;
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
@@ -16,6 +17,6 @@ class CreateBrand extends CreateRecord
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Brand Created';
+        return 'Permission Created';
     }
 }
