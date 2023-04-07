@@ -7,12 +7,14 @@ use App\Filament\Resources\ProductResource\RelationManagers;
 use App\Models\Brand;
 use App\Models\Product;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -26,6 +28,7 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
+                Card::make()->schema([
                 TextInput::make('name')
                     ->required()
                     ->maxLength(100)
@@ -37,6 +40,7 @@ class ProductResource extends Resource
                     ->relationship('brands', 'name')
                     ->options(Brand::all()->pluck('name', 'id'))
                     ->searchable()
+            ])
             ]);
     }
 
@@ -44,20 +48,22 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('brands.name')->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('name')->searchable(),
+                TextColumn::make('brands.name')->searchable(),
+                TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime('M j, Y')->sortable(),
             ])
             ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
-            ]);
+            ])
+            ;
     }
 
     public static function getRelations(): array

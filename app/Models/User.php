@@ -4,15 +4,18 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+
 // use Filament\Models\Contracts\FilamentUser;
 
 // class User extends Authenticatable implements FilamentUser
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -48,10 +51,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function canAccessFilament(): bool
-    // {
-    //     return $this->email == 'admin@admin.com' && $this->hasVerifiedEmail();
-    // }
+    public function canAccessFilament(): bool
+    {
+        return $this->hasRole('admin');
+        // return $this->email == 'admin@admin.com' && $this->hasVerifiedEmail();
+    }
 
     public function merchant()
     {
