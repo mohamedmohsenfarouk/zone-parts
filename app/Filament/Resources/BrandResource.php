@@ -27,11 +27,11 @@ class BrandResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(100)
-                    ->placeholder("Name"),
-            ])
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(100)
+                        ->placeholder("Name"),
+                ])
             ]);
     }
 
@@ -39,14 +39,14 @@ class BrandResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),
                 TextColumn::make('updated_at')
                     ->dateTime('M j, Y')->sortable(),
             ])
-            ->filters([
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

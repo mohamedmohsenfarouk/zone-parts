@@ -27,14 +27,14 @@ class MaintenancePlacesResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(100)
-                    ->placeholder("Name"),
-                TextInput::make('location')
-                    ->required()
-                    ->maxLength(255)
-                    ->placeholder("Location"),
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(100)
+                        ->placeholder("Name"),
+                    TextInput::make('location')
+                        ->required()
+                        ->maxLength(255)
+                        ->placeholder("Location"),
                 ])
             ]);
     }
@@ -43,6 +43,7 @@ class MaintenancePlacesResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('location')->searchable(),
                 TextColumn::make('created_at')

@@ -29,14 +29,14 @@ class OffersPricesResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                TextInput::make('description')
-                    ->required()
-                    ->maxLength(255)
-                    ->placeholder("description"),
-                FileUpload::make('file')
-                    ->required()
-                    ->preserveFilenames()
-            ])
+                    TextInput::make('description')
+                        ->required()
+                        ->maxLength(255)
+                        ->placeholder("description"),
+                    FileUpload::make('file')
+                        ->required()
+                        ->preserveFilenames()
+                ])
             ]);
     }
 
@@ -44,8 +44,9 @@ class OffersPricesResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 TextColumn::make('description')->searchable(),
-                TextColumn::make('file')->url(fn (OffersPrices $record): string => url('public/storage/'.$record->file))
+                TextColumn::make('file')->url(fn (OffersPrices $record): string => url('public/storage/' . $record->file))
                     ->openUrlInNewTab(),
                 TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),

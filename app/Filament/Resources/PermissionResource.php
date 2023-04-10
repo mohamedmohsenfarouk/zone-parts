@@ -30,11 +30,11 @@ class PermissionResource extends Resource
             ->schema([
                 Card::make()->schema([
                     TextInput::make('name')
-                    ->minLength(2)
-                    ->maxLength(100)
-                    ->required()
-                    ->unique()
-                    ->placeholder("Name"),
+                        ->minLength(2)
+                        ->maxLength(100)
+                        ->required()
+                        ->unique(ignoreRecord: true)
+                        ->placeholder("Name"),
                 ])
             ]);
     }
@@ -43,6 +43,7 @@ class PermissionResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->sortable(),
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('created_at')
