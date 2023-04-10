@@ -15,6 +15,7 @@ use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -52,6 +53,11 @@ class UserResource extends Resource
                         ->maxLength(50),
                     // to hide field in edit
                     // ->visible(fn (Component $livewire): bool => $livewire instanceof Pages\CreateUser),
+                    TextInput::make('country_code')
+                        ->tel()
+                        ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
+                        ->placeholder("Country Code")
+                        ->maxLength(5),
                     TextInput::make('phone')
                         ->tel()
                         ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/')
@@ -88,16 +94,19 @@ class UserResource extends Resource
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('email')->searchable(),
                 TextColumn::make('roles.name'),
-                Tables\Columns\BooleanColumn::make('status')->label('Status'),
-
+                TextColumn::make('phone')->label('Phone'),
+                BooleanColumn::make('status')->label('Status'),
                 TextColumn::make('created_at')
                     ->dateTime('M j, Y')->sortable(),
             ])
             ->filters([
-                Tables\Filters\Filter::make('active')
+                Tables\Filters\Filter::make('status')
                     ->query(fn (Builder $query): Builder => $query->where('status', "=",1)),
-                Tables\Filters\Filter::make('inactive')
+                Tables\Filters\Filter::make('status')
                     ->query(fn (Builder $query): Builder => $query->where('status', "=",0)),
+                    Tables\Filters\Filter::make('phone')
+                    ->query(fn (Builder $query): Builder => $query->where('status', "=",0)),
+            
             ])
             ->actions([
                 // Tables\Actions\ViewAction::make(),
