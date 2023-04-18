@@ -19,11 +19,13 @@ class CreateProductsTable extends Migration
             $table->string('name_ar', 100);
             $table->string('description', 255);
             $table->string('image', 255);
-            $table->enum('status', ['new', 'used'])->nullable();
+            $table->integer('new')->nullable();
+            $table->integer('used')->nullable();
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
-            
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();  
         });
     }
 

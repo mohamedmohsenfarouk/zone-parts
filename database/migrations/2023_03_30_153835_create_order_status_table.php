@@ -18,7 +18,9 @@ class CreateOrderStatusTable extends Migration
             $table->string('name_en', 100);
             $table->string('name_ar', 100);
             $table->integer('key');
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

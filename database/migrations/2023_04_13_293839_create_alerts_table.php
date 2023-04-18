@@ -15,13 +15,17 @@ class CreateAlertsTable extends Migration
     {
         Schema::create('alerts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('merchant_id');
+            $table->foreign('merchant_id')->references('id')->on('merchants')->onDelete('cascade');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->time('time');
             $table->date('date');
             $table->string('about', 255);
             $table->string('notes', 255);            
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();  
         });
     }
 

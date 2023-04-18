@@ -17,7 +17,9 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('message');
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();  
         });
     }
 
