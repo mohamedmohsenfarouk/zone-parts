@@ -19,7 +19,9 @@ class CreatePaymentMethodsTable extends Migration
             $table->string('name_ar', 100);
             $table->string('image', 255);
             $table->integer('key');
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

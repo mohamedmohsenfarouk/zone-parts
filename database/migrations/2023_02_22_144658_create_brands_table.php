@@ -18,8 +18,10 @@ class CreateBrandsTable extends Migration
             $table->string('name_en', 100);
             $table->string('name_ar', 100);
             $table->string('image', 255);
-            $table->enum('has_best', ['0', '1'])->nullable();
+            $table->integer('has_best')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

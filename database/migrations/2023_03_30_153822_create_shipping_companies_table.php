@@ -15,7 +15,14 @@ class CreateShippingCompaniesTable extends Migration
     {
         Schema::create('shipping_companies', function (Blueprint $table) {
             $table->id();
+            $table->date('date_delivery');
+            $table->string('logo');
+            $table->string('city_shipping');
+            $table->integer('active')->nullable();
+            $table->integer('inactive')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();  
         });
     }
 

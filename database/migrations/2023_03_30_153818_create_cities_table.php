@@ -19,8 +19,10 @@ class CreateCitiesTable extends Migration
             $table->string('name_ar', 100);
             $table->unsignedBigInteger('area_id');
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
-        });
+            $table->softDeletes();      
+          });
     }
 
     /**

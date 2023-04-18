@@ -16,7 +16,9 @@ class CreatePowerHoursTable extends Migration
         Schema::create('power_hours', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);            
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

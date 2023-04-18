@@ -20,10 +20,12 @@ class CreateSettingsTable extends Migration
             $table->string('snapchat_link');
             $table->string('twitter_link');
             $table->string("what's_app_link");
-            $table->string('phone_call_center');
-            $table->string('profit_ratio',50);
-            $table->string('delivery_service');
+            $table->integer('phone_call_center');
+            $table->decimal('profit_ratio',3);
+            $table->decimal('delivery_service', 3);
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();  
         });
     }
 

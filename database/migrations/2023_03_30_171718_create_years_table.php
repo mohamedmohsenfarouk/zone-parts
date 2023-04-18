@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOffersPricesTable extends Migration
+class CreateYearsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateOffersPricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('offers_prices', function (Blueprint $table) {
+        Schema::create('years', function (Blueprint $table) {
             $table->id();
-            $table->string('description', 255);
-            $table->string('file', 255);
+            $table->year('year');
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
-        });
+            $table->softDeletes();  
+                });
     }
 
     /**
@@ -28,6 +29,6 @@ class CreateOffersPricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offers_prices');
+        Schema::dropIfExists('years');
     }
 }

@@ -10,7 +10,7 @@ class Merchant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'customer_id',
         'product_id',
         'product_status',
         'product_qty',

@@ -26,7 +26,6 @@ class RolesTableSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('12345678'),
-            'status' => 1,
         ]);
         $user->assignRole($role1);
 

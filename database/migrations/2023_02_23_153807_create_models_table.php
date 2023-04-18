@@ -19,7 +19,9 @@ class CreateModelsTable extends Migration
             $table->string('name_ar', 100);
             $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

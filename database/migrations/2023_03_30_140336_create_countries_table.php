@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['new', 'accepted', 'preparing', 'shipped', 'delivered'])->nullable();
-            $table->unsignedBigInteger('payment_id');
-            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
+            $table->string('name_en', 100);
+            $table->string('name_ar', 100);
+            $table->integer('country_code')->length(4);
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +31,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('countries');
     }
 }

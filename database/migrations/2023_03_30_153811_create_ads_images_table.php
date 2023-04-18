@@ -16,9 +16,11 @@ class CreateAdsImagesTable extends Migration
         Schema::create('ads_images', function (Blueprint $table) {
             $table->id();
             $table->string('image', 100);
-            $table->enum('type', ['website', 'web'])->nullable();
+            $table->enum('type', ['website', 'web']);
+            $table->integer('deleted_by')->nullable();
             $table->timestamps();
-        });
+            $table->softDeletes();    
+            });
     }
 
     /**
